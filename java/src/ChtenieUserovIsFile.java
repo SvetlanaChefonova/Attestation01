@@ -2,30 +2,23 @@ package src;
 
 import src.model.User;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
+import java.sql.SQLOutput;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ChtenieUserovIsFile {
     public static void main(String[] args) {
 
-        try {
-            FileInputStream fis = new FileInputStream("users.txt");
-            ObjectInputStream ois = new ObjectInputStream(fis);
 
-            User user1 = (User) ois.readObject();
-            User user2 = (User) ois.readObject();
-
-            System.out.println(user1);
-            System.out.println(user2);
-
-            ois.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
+    public static User user(String[] userInfoArray) {
+        User user = new User(UUID.fromString(userInfoArray[0]), LocalDateTime.parse(userInfoArray[1]), userInfoArray[2], userInfoArray[3], userInfoArray[4], userInfoArray[5], userInfoArray[6], userInfoArray[7], Integer.parseInt(userInfoArray[8]), Boolean.parseBoolean(userInfoArray[9]));
+        return user;
+    }
 }
