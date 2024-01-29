@@ -2,9 +2,10 @@ package src.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class User implements Serializable {
-    private String id;
+    private UUID id;
     LocalDateTime localDateTime = LocalDateTime.now();
     private String login;
     private String password;
@@ -15,11 +16,11 @@ public class User implements Serializable {
     private Integer age;
     private Boolean isWorker = false;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -99,7 +100,7 @@ public class User implements Serializable {
 
     }
 
-    public User(String id, LocalDateTime localDateTime, String login, String password, String confirmPassword, String surname, String name, String patronymic, Integer age, Boolean isWorker) {
+    public User(UUID id, LocalDateTime localDateTime, String login, String password, String confirmPassword, String surname, String name, String patronymic, Integer age, Boolean isWorker) {
         this.id = id;
         this.localDateTime = localDateTime;
         this.login = login;
