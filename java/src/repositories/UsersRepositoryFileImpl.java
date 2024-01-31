@@ -21,7 +21,7 @@ public class UsersRepositoryFileImpl implements UsersRepository{
     public User findById(String id) throws RuntimeException {
 
         try{
-            var reader = new BufferedReader(new FileReader("C:\\Users\\Svetlana_Chefonova\\Documents\\file.txt"));
+            var reader = new BufferedReader(new FileReader("C:\\Users\\Svetlana_Chefonova\\Documents\\fileuser.txt"));
             String stringUser = reader.readLine();
             String idByUser = stringUser.substring(0, 36);
             while (!idByUser.equals(id)) {
@@ -45,7 +45,7 @@ public class UsersRepositoryFileImpl implements UsersRepository{
     public List<User> findAll(){
 
         try {
-            var reader = new BufferedReader(new FileReader("C:\\Users\\Svetlana_Chefonova\\Documents\\file.txt"));
+            var reader = new BufferedReader(new FileReader("C:\\Users\\Svetlana_Chefonova\\Documents\\fileuser.txt"));
 
             return reader.lines()
                     .map(line -> line.split("(\\|)"))
