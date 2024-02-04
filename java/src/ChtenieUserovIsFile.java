@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class ChtenieUserovIsFile {
-   // public static void main(String[] args) {
+    public static void main(String[] args) {
        // public static User user(String[] userInfoArray){
           //  User user = new User(UUID.fromString(userInfoArray[0]),
                 //    LocalDateTime.parse(userInfoArray[1]),
@@ -24,7 +24,7 @@ public class ChtenieUserovIsFile {
                   //  Boolean.parseBoolean(userInfoArray[9]));
          //   return user;
       //  }
-  //  }
+    }
 
 
 }

@@ -1,10 +1,11 @@
 package src.model;
 
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.UUID;
 
-public class User implements Serializable {
+public class User implements Serializable, Externalizable {
     private UUID id;
     LocalDateTime localDateTime = LocalDateTime.now();
     private String login;
@@ -130,4 +131,26 @@ public class User implements Serializable {
     }
 
 
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        ArrayList<String> userString = new ArrayList<>();
+        userString.add(0, id.toString());
+        userString.add(1, localDateTime.toString());
+        userString.add(2, login);
+        userString.add(3, password);
+        userString.add(4, confirmPassword);
+        userString.add(4, surname);
+        userString.add(4, name);
+        userString.add(4, patronymic);
+        userString.add(4, age.toString());
+        userString.add(4, isWorker.toString());
+        out.writeObject(String.join("\\|", userString));
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        var user = in.readObject();
+        System.out.println(user);
+        //User user = new User(UUID.fromString(userInfoArray[0]), LocalDateTime.parse(userInfoArray[1]), userInfoArray[2], userInfoArray[3], userInfoArray[4], userInfoArray[5], userInfoArray[6], userInfoArray[7], Integer.parseInt(userInfoArray[8]), Boolean.parseBoolean(userInfoArray[9]));
+    }
 }

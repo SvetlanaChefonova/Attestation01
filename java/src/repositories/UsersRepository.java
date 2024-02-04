@@ -11,6 +11,6 @@ public interface UsersRepository {
     User findById(String id) throws IOException;
     List<User> findAll();
     void update(User user);
-    void deleteById(UUID id);
-    void deleteAll();
+    void deleteById(UUID id) throws IOException;
+    void deleteAll() throws IOException;
 }
