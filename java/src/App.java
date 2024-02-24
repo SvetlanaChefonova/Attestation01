@@ -3,6 +3,7 @@ package src;
 import src.model.User;
 import src.repositories.UsersRepositoryFileImpl;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,11 +29,9 @@ public class App {
         System.out.println("Новый пользователь: "+ novUser);
 
 
-
-
         //проверка метода findById
         UsersRepositoryFileImpl repository = new UsersRepositoryFileImpl();
-        User user = repository.findById("f2a8a3cb-4ac9-4b3b-8a65-c424e129b9d4");
+        User user = repository.findById("f5a8a3cb-4ac9-4b3b-8a65-c424e129b9d3");
         System.out.println("Поиск пользователя по id: \n" + user);
 
         //проверка метода findAll
@@ -40,18 +39,22 @@ public class App {
         System.out.println("Все пользователи: \n"+ allUsers);
 
         //проверка метода update
-
+        novUser.setSurname("Русланов");
+        System.out.println(novUser);
+        repository.update(novUser);
 
         //проверка метода deleteById
-        //UsersRepositoryFileImpl repository2 = new UsersRepositoryFileImpl();
-        //repository2.deleteById(user.getId()); //UUID.fromString("f3a8a3cb-4ac9-4b3b-8a65-c424e129b9d2"));
-        //List<User> allUsers1 = repository2.findAll();
-        //System.out.println("Список пользователей после удаления одного пользователя: \n" );
-        return ;
+        UsersRepositoryFileImpl repository2 = new UsersRepositoryFileImpl();
+        repository2.deleteById(user.getId());
+        List<User> allUsers1 = repository.findAll();
+        System.out.println("Список пользователей после удаления одного пользователя: " );
+        System.out.println(allUsers1);
+
 
         //проверка метода deleteAll
-        //System.out.println("Все пользователи после удаления: ");
-        //repository.deleteAll();
+        System.out.println("Все пользователи после удаления: ");
+        repository.deleteAll();
+
 
 
 
