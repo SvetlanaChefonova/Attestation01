@@ -1,10 +1,12 @@
 package src.model;
 
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.StringJoiner;
 import java.util.UUID;
 
-public class User implements Serializable {
+public class User implements Serializable, Externalizable {
     private UUID id;
     LocalDateTime localDateTime = LocalDateTime.now();
     private String login;
@@ -100,7 +102,16 @@ public class User implements Serializable {
 
     }
 
-    public User(UUID id, LocalDateTime localDateTime, String login, String password, String confirmPassword, String surname, String name, String patronymic, Integer age, Boolean isWorker) {
+    public User(UUID id,
+                LocalDateTime localDateTime,
+                String login,
+                String password,
+                String confirmPassword,
+                String surname,
+                String name,
+                String patronymic,
+                Integer age,
+                Boolean isWorker) {
         this.id = id;
         this.localDateTime = localDateTime;
         this.login = login;
@@ -115,19 +126,42 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", localDateTime=" + localDateTime +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
-                ", surname='" + surname + '\'' +
-                ", name='" + name + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", age=" + age +
-                ", isWorker=" + isWorker +
-                '}';
+        return new StringJoiner("|")
+                .add(""+id)
+                .add(""+localDateTime)
+                .add(""+login)
+                .add(""+password)
+                .add(""+confirmPassword)
+                .add(""+surname)
+                .add(""+name)
+                .add(""+patronymic)
+                .add(""+age)
+                .add(""+isWorker)
+                .toString();
+
     }
 
 
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        ArrayList<String> userString = new ArrayList<>();
+        userString.add(0, id.toString());
+        userString.add(1, localDateTime.toString());
+        userString.add(2, login);
+        userString.add(3, password);
+        userString.add(4, confirmPassword);
+        userString.add(4, surname);
+        userString.add(4, name);
+        userString.add(4, patronymic);
+        userString.add(4, age.toString());
+        userString.add(4, isWorker.toString());
+        out.writeObject(String.join("\\|", userString));
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        var user = in.readObject();
+        System.out.println(user);
+
+    }
 }
